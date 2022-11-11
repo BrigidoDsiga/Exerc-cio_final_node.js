@@ -6,10 +6,10 @@ const app = express()
 const sequelize = new Sequelize({ dialect: 'sqlite', storage: './task-list.db' })
 const tasks = Task(sequelize, DataTypes)
 
-// We need to parse JSON coming from requests
+// We need to parse JSON coming from requests //
 app.use(express.json())
 
-// List tasks
+// List tasks //
 app.get('/tasks',async(req, res) => { 
   try {
     const taskld= await tasks.findAll()
@@ -19,7 +19,7 @@ app.get('/tasks',async(req, res) => {
     }
   })
 
-// Create task
+// Create task //
 app.post('/tasks', async (req, res) => {
   const { description, done} = req.body
   if(description == null || done == null){
@@ -40,7 +40,7 @@ app.post('/tasks', async (req, res) => {
 
 })
 
-// Show task
+// Show task //
 app.get('/tasks/:id', async(req, res) => {
 
 
@@ -61,7 +61,7 @@ app.get('/tasks/:id', async(req, res) => {
 }
 });
 
-// Update task
+// Update task //
  app.put('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
    const { description, done } = req.body
@@ -81,7 +81,7 @@ app.get('/tasks/:id', async(req, res) => {
  })
 
 
-// Delete task
+// Delete task //
 app.delete('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
   try {
